@@ -2,6 +2,18 @@ var express = require('express');
 var router = express.Router();
 var Author = require('../models/author');
 
+router.post('/register', (request, response) => {
+    var authorData = request.body;
+    var author = new Author(authorData)
+
+    author.save((error, result) => {
+        if (error) {
+            console.log("Error Saving The User")
+        }
+        response.status(201).send({ message: 'Created' })
+    })
+});
+
 router.post('/login', async (request, response) => {
     var authorData = request.body;
     var author = await author.findOne({ email: authorData.email })

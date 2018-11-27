@@ -1,22 +1,91 @@
 <body class="text-center">
-    <div class="form-signin">
-      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+  <div class="form-signin">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+    <form #registerForm="ngForm">
+      <div>
+        <label for="Firstname" class="sr-only">Firstname</label>
+        <input type="text" [(ngModel)]="registerUser.firstname" id="Firstname" class="form-control" placeholder="Firstname"
+          minlength="3" maxlength="30" name="Firstname" #Firstname="ngModel" required autofocus>
+        <div *ngIf="Firstname.errors && (Firstname.dirty || Firstname.touched)" class="alert alert-danger">
+          <div [hidden]="!Firstname.errors.required">
+            Firstname is required
+          </div>
+          <div [hidden]="!Firstname.errors.minlength">
+            minlength
+          </div>
+          <div [hidden]="!Firstname.errors.maxlength">
+            maxlength
+          </div>
+        </div>
+      </div>
 
-      <label for="Firstname" class="sr-only">Firstname</label>
-      <input type="text" [(ngModel)]="registerUser.firstname" id="Firstname" class="form-control" placeholder="Firstname" required autofocus>
+      <div>
+        <label for="Lastname" class="sr-only">Lastname</label>
+        <input type="text" [(ngModel)]="registerUser.lastname" id="Lastname" class="form-control" placeholder="Lastname"
+          minlength="3" maxlength="30" name="Lastname" #Lastname="ngModel" required autofocus>
+        <div *ngIf="Lastname.errors && (Lastname.dirty || Lastname.touched)" class="alert alert-danger">
+          <div [hidden]="!Lastname.errors.required">
+            Firstname is required
+          </div>
+          <div [hidden]="!Lastname.errors.minlength">
+            minlength
+          </div>
+          <div [hidden]="!Lastname.errors.maxlength">
+            maxlength
+          </div>
+        </div>
+      </div>
 
-      <label for="Lastname" class="sr-only">Lastname</label>
-      <input type="text" [(ngModel)]="registerUser.lastname" id="Lastname" class="form-control" placeholder="Lastname" required autofocus>
+      <div>
+        <label for="Nickname" class="sr-only">Nickname</label>
+        <input type="text" [(ngModel)]="registerUser.nickname" id="Nickname" class="form-control" placeholder="Nickname"
+          minlength="3" maxlength="30" name="Nickname" #Nickname="ngModel" required autofocus>
+        <div *ngIf="Nickname.errors && (Nickname.dirty || Nickname.touched)" class="alert alert-danger">
+          <div [hidden]="!Nickname.errors.required">
+            Firstname is required
+          </div>
+          <div [hidden]="!Nickname.errors.minlength">
+            minlength
+          </div>
+          <div [hidden]="!Nickname.errors.maxlength">
+            maxlength
+          </div>
+        </div>
 
-      <label for="Nickname" class="sr-only">Nickname</label>
-      <input type="text" [(ngModel)]="registerUser.nickname" id="Nickname" class="form-control" placeholder="Nickname" required autofocus>
+      </div>
 
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" [(ngModel)]="registerUser.email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <div>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" [(ngModel)]="registerUser.email" id="inputEmail" class="form-control" placeholder="Email address"
+          name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required autofocus>
+        <div *ngIf="email.errors && (password.dirty || password.touched)">
+          <div [hidden]="!email.errors.required">
+            Email is required
+          </div>
+          <div [hidden]="!email.errors.pattern">
+            Official Email not valid.
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" [(ngModel)]="registerUser.password" id="inputPassword" class="form-control" placeholder="Password"
+          minlength="8" maxlength="30" name="password" #password="ngModel" required>
+        <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+          <div [hidden]="!password.errors.required">
+            Firstname is required
+          </div>
+          <div [hidden]="!password.errors.minlength">
+            minlength
+          </div>
+          <div [hidden]="!password.errors.maxlength">
+            maxlength
+          </div>
+        </div>
+      </div>
 
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" [(ngModel)]="registerUser.password" id="inputPassword" class="form-control" placeholder="Password" required>
 
       <div class="checkbox mb-3">
         <label>
@@ -24,8 +93,9 @@
         </label>
       </div>
       <p class="text-center">Create an Account <a href="login">Login</a> </p>
-      <button class="btn btn-lg btn-primary btn-block" (click)="register(registerUser)" type="submit" [routerLink]="['/login']">Sign up</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-  
-    </div>
-  </body>
+      <button class="btn btn-lg btn-primary btn-block" [disabled]="!registerForm.form.valid" (click)="register()" type="submit">SignUp</button>
+    </form>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+
+  </div>
+</body>

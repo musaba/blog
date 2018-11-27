@@ -3,15 +3,14 @@ var router = express.Router();
 var User = require('../models/user');
 var jwt = require('jwt-simple');
 
-router.post('/register', (request, response) => {
+router.post('/register', async (request, response) => {
     var userData = request.body;
     var user = new User(userData)
-
     user.save((error, result) => {
         if (error) {
-            console.log("Error Saving The User")
+            return response.send({ message: 'Error Saving The User.' }  )
         }
-        response.status(201).send({ message: 'Created' })
+        return response.status(201).send({})
     })
 });
 
@@ -25,7 +24,7 @@ router.post('/login', async (request, response) => {
         return response.status(401).send({ message: 'Email or Password ınvalid' })
     }
     var payload = {}
-    var token = jwt.encode(payload,'12345')
+    var token = jwt.encode(payload, '12345')
     return response.status(200).send({ token })
 });
 

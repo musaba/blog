@@ -23,39 +23,10 @@ export class HomeComponent implements OnInit {
     private authorService : AuthorService
   ) { }
 
-  articles: Article[]
-  users: User[]
-  authors: Author[]
+
 
   ngOnInit() {
-    this.getAuthors();
-    this.activatedRoute.params.subscribe(params => {
-      if (params["authorId"] == undefined) {
-        this.getAllPost()
-      }
-      else {
-        this.getPost(params["authorId"]);
 
-      }
-
-    })
-  }
-  getAllPost() {
-    this.articleService.getAllPost().subscribe(data => {
-      this.articles = data
-    })
-  }
-
-  getPost(authorId) {
-    this.articleService.getPost(authorId).subscribe(data => {
-      this.articles = data
-    })
-  }
-
-  getAuthors() {
-    this.authorService.getAuthors().subscribe(data => {
-      this.authors = data
-    })
   }
 
 }

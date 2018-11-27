@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand mr-auto mr-lg-0" href="home">Blog </a>
   <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,7 +9,11 @@
         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="login">Sign in/Sign up</a>
+        <a class="nav-link" *ngIf="!authService.isAuthenticated" href="login">Sign in/Sign up</a>
+        <a class="nav-link" style="cursor:pointer" *ngIf="authService.isAuthenticated" (click)="authService.logOut()">Logout </a>
+      </li>
+      <li>
+        <a class="nav-link" style="cursor:pointer" *ngIf="authService.isAuthenticated" (click)="userService.profile()" >Profile </a>
       </li>
     </ul>
   </div>

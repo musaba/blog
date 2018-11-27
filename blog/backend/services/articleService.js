@@ -26,22 +26,26 @@ router.get('', (request, response) => {
 
     });
 })
-router.get('authorId', async (request, response) => {
-    var articleArray = []
-    var a = request.body
-    var article = await article.findOne({ authorId: a.authorId })
-    if(a.authorId!=article.authorId){
-        response.status(404)
-    }
+
+router.post('/Id', (request, response) => {
     
-    Article.find({ a }, function (error, articles) {
+    
+    var a =  request.body
+    
+    
+   articleArray = Article.find({authorId : a.authorId},function(error,articles){
+    var articleArray = []
         articles.forEach(function (article) {
             articleArray.push(article);
         });
         response.send(articleArray);
+    })
 
-    });
-})
+    
+
+});
+
+
 
 var article = { router }
 module.exports = article;
